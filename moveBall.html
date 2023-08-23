@@ -1,0 +1,104 @@
+<div id="main"></div>
+
+<script>
+  class ball {
+    ballID;
+    ball;
+    width = 450;
+    height = 380;
+    velocityx;
+    velocityy;
+    positionx;
+    positiony;
+    ballHeight;
+    reverse;
+    up;
+
+    constructor(ballID, zindex, color) {
+      this.ballID = ballID;
+      this.velocityx = this.getRandomInt(10);
+      this.velocityy = this.getRandomInt(10);
+      this.positionx = this.getRandomInt(this.width);
+      this.positiony = this.getRandomInt(this.height);
+      this.ballSize = this.getRandomInt(50) + 10;
+
+      if (this.getRandomInt(10) % 2 === 0) {
+        this.reverse = false;
+      } else {
+        this.reverse = true;
+      }
+
+      if (this.getRandomInt(10) % 2 === 0) {
+        this.up = false;
+      } else {
+        this.up = true;
+      }
+
+      const mainDiv = document.querySelector("#main");
+      const div = document.createElement("div");
+      div.setAttribute("id", ballID);
+      div.style.cssText = `position:absolute; z-index:${zindex}; background:${color};`;
+      div.style.cssText += `left:${this.positionx}; top:${this.positiony};`;
+      div.style.cssText += `width:${this.ballSize}; height:${this.ballSize};`;
+      div.style.cssText += `border-radius:50%; background:${this.ballSize};`;
+      mainDiv.appendChild(div);
+    }
+
+    moveBall() {
+      if (this.positionx >= this.width) {
+        this.reverse = true;
+        this.velocityx = this.getRandomInt(10);
+      }
+
+      if (this.positionx <= 0) {
+        this.reverse = false;
+        this.velocityx = this.getRandomInt(10);
+      }
+
+      if (this.positiony >= this.height) {
+        this.up = true;
+        this.velocityy = this.getRandomInt(10);
+      }
+
+      if (this.positiony <= 0) {
+        this.up = false;
+        this.velocityy = this.getRandomInt(10);
+      }
+
+      if (this.reverse === false) {
+        this.positionx = this.positionx + this.velocityx;
+      } else {
+        this.positionx = this.positionx - this.velocityx;
+      }
+
+      if (this.up === false) {
+        this.positiony = this.positiony + this.velocityy;
+      } else {
+        this.positiony = this.positiony - this.velocityy;
+      }
+
+      var ball = document.getElementById(this.ballID);
+      ball.style.left = this.positionx + "px";
+      ball.style.top = this.positiony + "px";
+    }
+
+    getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+  }
+
+  const aBall1 = new ball("ball", 1, "red");
+  setInterval("aBall1.moveBall()", 10);
+
+  const aBall2 = new ball("ball2", 2, "green");
+  setInterval("aBall2.moveBall()", 10);
+
+  const aBall3 = new ball("ball3", 3, "blue");
+  setInterval("aBall3.moveBall()", 10);
+
+  const aBall4 = new ball("ball4", 4, "orange");
+  setInterval("aBall4.moveBall()", 10);
+
+  const aBall5 = new ball("ball5", 5, "purple");
+  setInterval("aBall5.moveBall()", 10);
+</script>
