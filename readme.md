@@ -9,4 +9,7 @@ Drag the html to a browser. Balls will begin moving.
 Support can be found by contacting me at apquinn@gmail.com.
 
 #### License information
-Open source.
+MIT Open source license
+
+#### Future plans
+Planning to add code to change the ball size when it bumps a boundry
